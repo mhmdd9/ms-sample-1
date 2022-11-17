@@ -1,5 +1,14 @@
 spring:
   application:
-    name: ms-2
+    name: ms2
+#  profiles:
+#    active: test
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+  config:
+    import: optional:configserver:http://root:s3cr3t@localhost:8888
 server:
   port: 8082
+book:
+  name: Lord Of the Rings
