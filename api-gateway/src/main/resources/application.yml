@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: apigateway
+  cloud:
+    gateway:
+      routes:
+      - id: ms1
+        uri: http://localhost:8081
+        predicates:
+        - Path=/book-guide/**
+      - id: ms3
+        uri: lb://ms3
+        predicates:
+        - Path=/rating/**
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/myrealm
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8181

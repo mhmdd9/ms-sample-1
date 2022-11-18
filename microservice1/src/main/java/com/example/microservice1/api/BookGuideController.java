@@ -22,7 +22,7 @@ public class BookGuideController {
 
     @GetMapping("/{userId}")
     public List<GuideItem> getGuide(@PathVariable String userId) {
-        UserRating userRating = restTemplate.getForObject("http://ms3:8083/rating/user/" + userId, UserRating.class);
+        UserRating userRating = restTemplate.getForObject("http://ms3/rating/user/" + userId, UserRating.class);
         return userRating.getRatingList().stream()
                 .map(rating -> new GuideItem(rating.getRating(), "test", "desc"))
                 .collect(Collectors.toList());
