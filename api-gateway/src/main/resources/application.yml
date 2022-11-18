@@ -5,18 +5,28 @@ spring:
     gateway:
       routes:
       - id: ms1
-        uri: http://localhost:8081
+        uri: lb://ms1
         predicates:
         - Path=/book-guide/**
       - id: ms3
         uri: lb://ms3
         predicates:
         - Path=/rating/**
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8080/realms/myrealm
+      - id: eureka
+        uri: http://localhost:8761
+        predicates:
+        - Path=/eureka/web
+        filters:
+        - SetPath=/
+      - id: eureka-static
+        uri: http://localhost:8761
+        predicates:
+        - Path=/eureka/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/myrealm
 
 management:
   endpoints:
@@ -25,3 +35,7 @@ management:
         include: "*"
 server:
   port: 8181
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:password@localhost:8761/eureka
