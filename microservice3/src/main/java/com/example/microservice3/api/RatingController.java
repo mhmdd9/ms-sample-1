@@ -2,6 +2,7 @@ package com.example.microservice3.api;
 
 import com.example.microservice3.domain.Rating;
 import com.example.microservice3.domain.UserRating;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,9 @@ public class RatingController {
     }
 
     @RequestMapping("/user/{userId}")
+    @SneakyThrows //do not use it in prod
     public UserRating getUserRatings(@PathVariable("userId") String userId) {
+        Thread.sleep(10000);
         UserRating userRating = new UserRating();
         userRating.initData(userId);
         return userRating;

@@ -1,9 +1,16 @@
 spring:
   application:
     name: ms3
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8090/realms/my-realm/protocol/openid-connect/certs
 server:
   port: 8083
 eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka:password@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
